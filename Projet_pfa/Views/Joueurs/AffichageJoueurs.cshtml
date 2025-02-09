@@ -1,0 +1,57 @@
+﻿@model List<List<Joueur>>
+
+@{
+    ViewData["Title"] = "Joueurs";
+    Layout = "_Layout";
+}
+
+<header>
+    <link rel="stylesheet" href="~/css/StyleJoueur.css" />
+</header>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">TAILLE DE L'EFFECTIF</h4>
+            <p class="card-text">@ViewBag.NombreDeJoueurs</p>
+        </div>
+    </div>
+    @if (ViewBag.IsAdmin == true)
+    {
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"></h4>
+                <br>
+                <a class="btn-custom" style="padding:1rem 1rem;margin-bottom:10px;" asp-controller="Joueurs" asp-action="AddJoueurs" asp-route-id="@TempData["EquipeId"]">Ajouter Joueur</a>
+            </div>
+            <div class="card-title">
+                <a asp-action="AjoutEquipes" class="btn btn-danger btn-custom" style="padding:1rem 1rem;margin-left: 15px;margin-bottom:10px;" asp-controller="Equipes">List Des Equipes</a>
+            </div>
+        </div>
+    }
+</div> <!-- Closing div for container -->
+<br />
+<table id="tab" class="table-bordered table-hover table">
+    @foreach (var group in Model)
+    {
+        <tr>
+            <th colspan="1">@group.First().Role</th>  @*Assumer que tous les joueurs dans un groupe ont le même rôle*@
+        </tr>
+        @foreach (Joueur joueur in group)
+        {
+            <tr>
+                <td>@joueur.NumeroMaillot</td>
+                <td class="custom-size"><img src="~/@joueur.Photo" width="55px" height="55px" /></td>
+                <td>@joueur.Nom @joueur.Prenom</td>
+                <td>@ViewBag.Ages[joueur.Id] Ans</td>
+                @if (ViewBag.IsAdmin == true)
+                {
+                <td>
+                    <a asp-controller="Joueurs" asp-action="Update" asp-route-id="@joueur.Id"><i class="fa-sharp fa-solid fa-pen-to-square"></i> </a>
+                </td>
+                <td> <a onclick="return confirm('Vous êtes sur de supprimer')" asp-controller="Joueurs" asp-action="Delete" asp-route-id="@joueur.Id"><i class="fa-solid fa-trash"></i></a></td>
+                }
+            </tr>
+        }
+    }
+</table>

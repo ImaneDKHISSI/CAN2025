@@ -1,0 +1,124 @@
+﻿@model Projet_pfa.ViewModel.RecapitulatifVM
+
+@{
+    Layout= "_Layout";
+}
+
+@section Style{
+    <link rel="stylesheet" href="~/css/StyleRecapitulatif.css" />
+}
+
+
+@* <div class="recap">
+    
+        <div class="info1">
+            <span>Categorie @Model.categorie</span>
+            <span>Prix : @Model.prixCategorie usd</span>
+        </div>
+        <div class="info2">
+            <span>Nombre de personne :@Model.nbrTicket</span>
+            <span>Stade : @Model.stade</span>
+        </div>
+        <div>
+            <a class="btn btn-primary" asp-action="" asp-controller="">Valider</a>
+        </div>
+    
+    
+   
+
+</div> *@
+
+
+<div class="Container">
+    <div class="Souscontainer">
+        <div class="MatchRelated">
+            <div class="MatchHeader">
+                <div class="Equipes">
+                    <img src="~/@Model.Equipe1.Drapeau" alt="@Model.Equipe1.Nom Drapeau" width="30px" height="30px" />
+                    <img src="~/@Model.Equipe2.Drapeau" alt="@Model.Equipe2.Nom Drapeau" width="30px" height="30px" />
+                </div>
+                <div class="MatchInformations">
+                    <div>
+                        @Model.Equipe1.Nom VS @Model.Equipe2.Nom
+                    </div>
+                    <div>
+                        <b>@Model.Date</b>
+                    </div>
+                    <div>
+                        CAF - @Model.stade.Nom
+                    </div>
+                </div>
+            </div>
+            <div class="TicketInformations">
+                <div>
+                    <h4>@Model.Equipe1.Nom Vs @Model.Equipe2.Nom Ticket</h4>
+                    <div class="NbrTickets">Nombre de Tickets : @Model.nbrTicket</div>
+                    <div class="NbrTickets">
+                        Bénéficiaire(s):
+                        @if (Model.nbrTicket == 1)
+                        {
+                            @Model.nomcomplets[0]
+                        }
+                        else
+                        {
+                            @foreach (string beneficiaire in Model.nomcomplets)
+                            {
+                                @beneficiaire.ToUpper()
+
+                                @if (Model.nomcomplets.IndexOf(beneficiaire) < Model.nbrTicket - 1)
+                                {
+                                    <text> , </text>
+                                }
+                            }
+                        }
+                        
+                     
+                    </div>
+
+                    <div class="Categorie"><b>Catégorie : @Model.categorie</b></div>
+                    <div>Format : <b>E-Billet</b></div>
+                </div>
+                <div>
+                    <span class="Price"><b>$@Model.prixCategorie</b></span>
+                </div>
+
+            </div>
+        </div>
+        <div class="AmountRelated">
+            <div class="TicketDetails">
+                <h2>Tarif</h2>
+                <ul>
+                    <li>
+                        <div class="ticket-label">Ticket tarif:</div>
+                        <div class="ticket-price"><b>$@Model.prixCategorie</b></div>
+                    </li>
+                    <li>
+                        <div class="ticket-label">Coût total des billets:</div>
+                        <div class="ticket-price"><b>$@((decimal)Model.prixCategorie * Model.nbrTicket)</b></div>
+                    </li>
+                    
+                    
+                    <hr />
+                    <li>
+                        <div class="ticket-label"><b>All Tax Included:</b></div>
+                        <div class="ticket-price"><b>$@((decimal)Model.prixCategorie * Model.nbrTicket )</b></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="Checkout">
+                <form asp-action="Checkout" asp-controller="Ticket">
+                    <button class="button" type="submit" >
+                        CheckOut
+                        <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+                            <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </form>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

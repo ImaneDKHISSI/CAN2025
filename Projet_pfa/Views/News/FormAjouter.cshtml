@@ -1,0 +1,16 @@
+﻿@model Projet_pfa.ViewModel.AddNewVM
+<form action="/News/Ajouter" method="post" class="text-light" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="titre">Titre : </label>
+        <input type="text" asp-for="Titre" class="form-control" id="titre"/>
+    </div>
+    <div class="form-group">
+        <label>Image : </label>
+        <input type="file" asp-for="Photo" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Texte : </label>
+        <textarea asp-for="Texte" class="form-control"></textarea>
+    </div>
+    <button type="submit">Ajouter</button>
+</form>

@@ -1,0 +1,30 @@
+﻿@model Projet_pfa.ViewModel.UpdateNewsVM
+<form asp-action="Modifier" asp-controller="News" asp-route-id=@ViewBag.News.Id method="post" enctype="multipart/form-data" class="text-light">
+    <div >
+        <label>Titre : </label>
+        <input class="form-control" type="text" asp-for="Titre" value=@ViewBag.News.Titre />
+    </div>
+    <div >
+        <label>Image : </label>
+        <input class="form-control" type="file" asp-for="Photo" value=@ViewBag.News.Photo />
+    </div>
+    <div >
+        <label>Texte : </label>
+        @* <input type="text" asp-for="Texte" value=@ViewBag.News.Texte size="100"/> *@
+        <textarea class="form-control" name="texte" id="myTextarea" rows="5" cols="100">@ViewBag.News.Texte</textarea>
+
+    </div>
+    @* <div>
+        <input type="hidden" id="hiddenInput" asp-for="Texte" />
+    </div> *@
+    <button type="submit">Modifier</button>
+</form>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#myTextarea").on("keyup change", function () {
+                $("#hiddenInput").val($(this).val());
+            });
+        });
+    </script>
+}

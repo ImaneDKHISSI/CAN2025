@@ -1,0 +1,9 @@
+﻿
+
+<div class="alert alert-danger">
+    <p>An error occurred:</p>
+    @if (TempData["ExTicketUnavailable"] != null)
+    {
+        <pre>@TempData["ExTicketUnavailable"]</pre>
+    }
+</div>

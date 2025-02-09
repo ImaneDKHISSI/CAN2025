@@ -1,0 +1,154 @@
+﻿@model TicketsPdfVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>PDF View</title>
+    <style>
+        
+        body{
+            /* background-color: #f2f2f2; */
+            height:100vh;
+        }
+        .aboutMatch{
+            padding-block:10px;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin:auto;
+            color: #fefeff;
+            display:flex;
+            flex-direction:column;
+            gap:10px;
+            align-items:start;
+            width:70%;
+            
+        }
+
+        .aboutMatch div{
+            display:flex;
+            flex-direction:row;
+            align-items:center;
+            gap:10px;
+        }
+
+        .contain{
+            background-color: black;
+        }
+        .billet{
+            
+            width:100%;
+            /* margin: auto; */
+            display:flex;
+            flex-direction:column;
+            
+        }
+
+        .contries{
+            padding-block:11px;
+            display:flex;
+            flex-direction:row;
+            justify-content:space-around;
+            align-items:center;
+            background-color: #fefeff;
+        }
+
+        .contries div:first-child, .contries div:nth-child(3) {
+            display:flex;
+            align-items:center;
+            flex-direction:column;
+        }
+
+        .QrcodeTicket{
+            
+            width: 100%;
+            display:flex;
+            flex-direction:row;
+            box-shadow: 0px 0px 30px 0px rgba(82, 63, 105, 0.05);
+            border-radius: 0.42rem;
+            
+            
+            
+        }
+        .Qrcode{
+            
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:space-around;
+            background-color: #fefeff;
+        }
+
+        .Qrcode img:first-child
+        {
+            padding-top:5px;
+        }
+        .ticketNum{
+            color: #ff153e;
+            font-weight:bold;
+        }
+        p{
+           margin:0;
+        }
+    </style>
+</head>
+<body>
+    @if(Model != null)
+    {
+        int i = 0;
+        @foreach (Ticket ticket in Model.BuyedTickets)
+        {
+            
+            <div class="QrcodeTicket">
+                <div class="billet">
+                    <div class="contain">
+                        <div class="aboutMatch">
+                            <div>
+                                @* <i class="fa-solid fa-calendar-days"></i> *@
+                                <img src="wwwroot/images/Icons/calendar2.png" width="25px" height="25px" />
+                                <span>@ticket.Match.Date.ToString("dddd dd MMMM yyyy").ToUpper()</span>
+                            </div>
+                            <div>
+                                <img src="wwwroot/images/Icons/clock.png" width="25px" height="25px" />
+                                <span>@ticket.Match.Date.ToString("HH'H'mm")</span>
+                            </div>
+                            <div>
+                                <img src="wwwroot/images/Icons/location.png" width="25px" height="25px" />
+                                <span>@ticket.Match.Stade.Nom</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contries">
+                        <div>
+                            <img src="wwwroot/@ticket.Match.Equipe1.Drapeau" width="70px" height="70px" />
+                            <p>@ticket.Match.Equipe1.Nom</p>
+                        </div>
+                        <div>
+                            VS
+                        </div>
+                        <div>
+                            <img src="wwwroot/@ticket.Match.Equipe2.Drapeau" width="70px" height="70px" />
+                            <p>@ticket.Match.Equipe2.Nom</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="Qrcode">
+                    <img src="wwwroot/images/Icons/trophie.png" height="70px" width="100px" />
+                    <p> QrCode :</p>
+                    <img src="@Model.QrcodeImg[i]" height="100px" width="85%" />
+                    <p class="ticketNum">N:@ticket.Id</p>
+                </div>
+            </div>
+            i++;
+        }
+        
+    }
+   
+
+</body>

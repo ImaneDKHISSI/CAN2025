@@ -1,0 +1,101 @@
+﻿@model Projet_pfa.ViewModel.MatchViewModel
+<form action="/Match/Ajouter" method="post" class="text-light">
+    <div>
+        <label>Date : </label>
+        <input type="date" asp-for="Date" />
+    </div>
+    <div>
+        <label>Equipe 1 : </label>
+        <select  asp-for="IdEquipe1" id="Equipe1">
+            <option value="" selected="selected">-- Sélectionnez une équipe --</option>
+            @foreach (var equipe in @ViewBag.Equipes)
+            {
+                <option value=@equipe.Id>@equipe.Nom</option>
+            }
+        </select>
+    </div>
+    
+    <div>
+        <label>Equipe 2 : </label>
+        <select  asp-for="IdEquipe2" id="Equipe2">
+            
+            <option value="" selected="selected">-- Sélectionnez une équipe --</option>
+            @foreach (var equipe in @ViewBag.Equipes)
+            {
+                <option value=@equipe.Id>@equipe.Nom</option>
+            }
+        </select>
+        @if (TempData["SameEquipe"] != null)
+        {
+            <div style="color:red;">
+                Vous ne pouvez pas Choisir la même equipe dans un seul match 
+            </div>
+        }
+    </div>
+    <div>
+        <label>Stade : </label>
+        <select asp-for="IdStade">
+            
+            @foreach (var stade in @ViewBag.Stades)
+            {
+                <option value=@stade.Id>@stade.Nom, @stade.Ville.Nom</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Prix C1 : </label>
+        <input type="number" min="0" step="10" placeholder="0" asp-for="PrixSiegeCat1">
+    </div>
+    <div>
+        <label>Prix C2 : </label>
+        <input type="number" min="0" step="10" placeholder="0" asp-for="PrixSiegeCat2">
+    </div>
+    <div>
+        <label>Prix C3 : </label>
+        <input type="number" min="0" step="10" placeholder="0" asp-for="PrixSiegeCat3">
+    </div>
+    
+
+    <button type="submit">Ajouter</button>
+</form>
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            
+            // Get both select elements
+            const equipe1Select = $("#Equipe1");
+            const equipe2Select = $("#Equipe2");
+
+            // Populate the second select initially (optional, adjust as needed)
+            equipe2Select.append($("#Equipe1 option").clone());
+
+            // Event listener for change on equipe1 select
+            equipe1Select.on("change", function () {
+                const selectedValue = $(this).val();
+
+                // Show all options in equipe2
+                equipe2Select.find('option').attr('hidden', false);
+
+                // Hide the newly selected option (if any)
+                // equipe2Select.find(`option[value="${selectedValue}"]`).attr('hidden', true);
+                equipe2Select.find(`option[value="${selectedValue}"]`).prop('disabled', true);
+            });
+
+            ///
+            equipe2Select.on("change", function () {
+                const selectedValue = $(this).val();
+
+                // Show all options in equipe2
+                equipe2Select.find('option').attr('hidden', false);
+
+                // Hide the newly selected option (if any)
+                // equipe1Select.find(`option[value="${selectedValue}"]`).attr('hidden', true);
+                equipe1Select.find(`option[value="${selectedValue}"]`).prop('disabled', true);
+            });
+        });
+    </script>
+}
+        
+    
+

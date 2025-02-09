@@ -1,0 +1,29 @@
+﻿<a class="btn btn-success" href="@Url.Action("FormAjouter", "News")"> Ajouter </a>
+<table class="table text-light">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Date</th>
+			<th>Titre</th>
+			<th>Photo</th>
+			<th>Texte</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (News news in ViewBag.NewsList)
+		{
+			<tr>
+				<td>@news.Id</td>
+				<td>@news.Date.ToShortDateString()</td>
+				<td>@news.Titre</td>
+                <td width="200px" height="100px"><img src="~/images/@news.Photo"style="width:100%;height:100%;" alt="" class="image"></td>
+				<td>@news.Texte</td>
+				<td>
+					<a class="btn btn-warning" asp-action="FormModifier" asp-controller="News" asp-route-id=@news.Id> Modifier </a>
+					<a class="btn btn-danger" asp-action="Supprimer" asp-controller="News" asp-route-id=@news.Id> Supprimer </a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

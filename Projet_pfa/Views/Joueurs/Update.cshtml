@@ -1,0 +1,49 @@
+﻿@model Projet_pfa.ViewModel.JoueurUpdateVM
+
+@{
+    ViewData["Title"] = "AddJoueurs";
+    Layout = "_Layout";
+}
+
+
+<header>
+    <link rel="stylesheet" href="~/css/StyleAddJoueur.css" />
+</header>
+
+<h1>Modifier Joueur</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Update" method="post" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+            <div class="form-group">
+                <label asp-for="Nom" class="control-label"></label>
+                <input asp-for="Nom" class="form-control" />
+                <span asp-validation-for="Nom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prenom" class="control-label"></label>
+                <input asp-for="Prenom" class="form-control" />
+                <span asp-validation-for="Prenom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroMaillot" class="control-label"></label>
+                <input asp-for="NumeroMaillot" class="form-control" />
+                <span asp-validation-for="NumeroMaillot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateNaissance" class="control-label"></label>
+                <input asp-for="DateNaissance" class="form-control" />
+                <span asp-validation-for="DateNaissance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn2" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

@@ -1,0 +1,42 @@
+﻿<a class="btn btn-success" href="@Url.Action("FormAjouter", "Match")"> Ajouter </a>
+<div>
+	<a asp-action="Index" class="btn btn-danger" style="margin-top:10px;" asp-controller="Match">List Des Matchs</a>
+</div>
+<table class="table text-light">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Date</th>
+			<th>Equipe 1</th>
+			<th>Equipe 2</th>
+			<th>Stade</th>
+			<th>Résultat</th>
+			<th>Prix C1</th>
+			<th>Prix C2</th>
+			<th>Prix C3</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var match in ViewBag.Matches)
+		{
+			<tr>
+				<td>@match.Id</td>
+				<td>@match.Date.ToShortDateString()</td>
+				<td>@match.Equipe1.Nom</td>
+				<td>@match.Equipe2.Nom</td>
+				<td>@match.Stade.Nom, @match.Stade.Ville.Nom</td>
+				<td>@match.Resultat</td>
+				<td>@match.PrixSiegeCat1</td>
+				<td>@match.PrixSiegeCat2</td>
+				<td>@match.PrixSiegeCat3</td>
+				<td>
+					<a class="btn btn-warning" asp-action="FormModifier" asp-controller="Match" asp-route-id=@match.Id> Modifier </a>
+					<a class="btn btn-danger" asp-action="Supprimer" asp-controller="Match" asp-route-id=@match.Id> Supprimer </a>
+				</td>
+			</tr>
+		}
+		
+	</tbody>
+</table>
+

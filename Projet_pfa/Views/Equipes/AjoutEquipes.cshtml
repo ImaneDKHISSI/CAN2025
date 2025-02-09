@@ -1,0 +1,40 @@
+﻿@model List<Groupe>
+
+@{
+    ViewData["Title"] = "Equipes";
+    Layout = "_Layout";
+}
+<head>
+    <link rel="stylesheet" href="~/css/StyleEquipe.css" />
+</head>
+<div class="header">
+    <img src="~/images/LogoImane2.png" alt="" width="100" height="100">
+    <h1>final draw</h1>
+</div>
+<div class="container">
+    @foreach (Groupe g in Model)
+    {
+        <div class="groupe-vertical">
+
+
+            <h2>Groupe @g.Nom</h2>
+
+            @foreach (Equipe e in g.Equipes)
+            {
+                <div class="equipe">
+                    <img src="~/@e.Drapeau" alt="" class="image" width="100" height="100">
+                    <p class="name">
+                        <a asp-controller="Joueurs" asp-action="AffichageJoueurs" asp-route-Id="@e.Id">@e.Nom</a>
+                    </p>
+                </div>
+            }
+
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

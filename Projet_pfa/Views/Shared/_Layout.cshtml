@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @RenderSection("Title",required:false)
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Projet_pfa.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/StyleAcceuil.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald&display=swap">
+    <style>
+        .font1 {
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .vertical-center {
+            display: flex;
+            flex-direction: column; /* Pour empiler les éléments verticalement */
+            align-items: center; /* Pour les centrer horizontalement */
+        }
+        .img-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .img-container img {
+                max-width: 100%;
+                max-height: 100%;
+                width: auto;
+                height: auto;
+        }
+
+        .hauteur-carousel {
+            height: 350px;
+        }
+
+        .margin {
+            margin: 30px; 
+        }
+
+        .margin-sides {
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+
+        .margin-bottom {
+            margin-bottom: 30px;
+        }
+
+        .padding {
+            padding: 30px;
+        }
+
+        .coins-arrondis{
+            border-radius: 10px
+        }
+
+        .red {
+            color: #c22929 !important;
+        }
+
+        .green {
+            color: #277037 !important;
+        }
+
+        .darkgreen {
+            color: #115234 !important;
+        }
+
+        .beige {
+            color: #ce9355 !important;
+        }
+
+        .darkbeige {
+            color: #BB7835 !important;
+        }
+
+        .red-background {
+            background-color: #c22929 !important;
+        }
+
+        .green-background {
+            background-color: #277037 !important;
+        }
+
+        .darkgreen-background {
+            background-color: #115234 !important;
+        }
+
+        .lightgreen-background {
+            background-color: #72CD86 !important;
+        }
+        
+        .beige-background {
+            background-color: #ce9355 !important;
+        }
+
+        /* .nav-item:hover {
+            background-color: #277037;
+            border-radius: 10px;
+        }
+
+        .nav-link:hover {
+            color: #ce9355 !important;
+        } */
+
+        /* .dropdown:hover {
+            background-color: #277037;
+            border-radius: 10px;
+        } */
+
+        .cercle {
+            border-radius : 50%;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #313A49;
+            border-radius: 10px;
+        }
+
+        .left-rounded {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        .right-rounded {
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .container-commentaires {
+            display: flex;
+            align-items: center;
+            margin: 10px 0; /* Marge autour du texte */
+        }
+
+        .line-commentaires {
+            flex: 1;
+            border-bottom: 1px solid #BB7835; /* Ligne horizontale */
+            margin: 0 10px; /* Espacement entre la ligne et le texte */
+        }
+
+        .text-commentaires {
+            white-space: nowrap; /* Empêche le texte de se diviser sur plusieurs lignes */
+            padding: 0 10px; /* Espacement autour du texte */
+        }
+        /*partie manal*/
+
+            .navbar-nav
+
+        {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            gap: 60px;
+            font-size: 25px;
+            /*margin-right: 250px;*/
+        }
+
+        .navbar-collapse {
+            max-width: fit-content;
+        }
+
+        .dropdown-menu {
+            //margin-left: -100px;
+            background-color: white;
+        }
+
+        .dropdown-item.clicked:hover {
+            background-color: #c22929;
+            color: white;
+        }
+
+
+        .dropdown {
+            margin-left: 0px;
+        }
+
+        a.dropdown-item {
+            color: black;
+        }
+
+        .aside {
+            //border: 5px solid;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            gap: 100px;
+        }
+
+        a.navbar-brand {
+            margin-left: 55px;
+        }
+
+        /*partie manal 2*/
+
+        body {
+            background-color: #1a2535 !important;
+            font-family: unset;
+            width: 100%;
+        }
+
+        .nav-link {
+            color: white !important;
+        }
+
+            .nav-link:hover {
+                color: Yellow !important;
+                border-bottom: 4px solid #d71f00;
+                /*box-shadow: inset 0 5px 35px rgba(0,0,0,.1); see if u can get rid of the shadow*/
+                border-radius: 15px;
+                font-weight: bold;
+                /*background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);*/
+            }
+
+        nav {
+            width: 100% !important;
+            font-size: 20px;
+            font-family: unset;
+            color: black !important;
+        }
+
+        i, .dropdown-toggle {
+            color: #c22929;
+        }
+
+
+            /* .dropdown-toggle:hover {
+                border: 1px solid #277037;
+                color: #277037;
+            } */
+        .navbar{
+            background-color: #1a2535 !important;
+        }
+
+        .darkblue-background{
+            background-color: #1a2535 !important;
+        }
+
+        .blue-background {
+            background-color: #313A49 !important;
+        }
+
+    </style>
+    @RenderSection("Style",required:false)
+
+</head>
+<body>
+
+        <nav class="container-fluid navbar navbar-expand-lg navbar-light">
+            <!-- image logo-->
+            <a class="navbar-brand" href="#">
+            <img src="~/logos/CAN25_LogoHabib.png" width="70" alt="">
+            </a>
+            <!-- navbar -->
+            <div class="container navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link beige" asp-controller="Accueil" asp-action="Index">Acceuil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link beige" asp-controller="Match" asp-action="Index">Matchs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link beige" asp-controller="Equipes" asp-action="AjoutEquipes">Equipes</a>
+                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="Getpublications" asp-controller="publication">Publication</a>
+                </li>
+                
+                
+                </ul>
+
+
+            </div>
+        <div class="dropdown" >
+            <button type="button" class="btn dropdown-toggle red" data-toggle="dropdown">
+                    <i class="fa-solid fa-user red"></i>
+                </button>
+            <div class="dropdown-menu" style="margin-left: -100px;">
+                    <a class="dropdown-item" asp-action="FormAuthentification" asp-controller="Utilisateurs">S'authentifier</a>
+                    <a class="dropdown-item" asp-action="FormInscription" asp-controller="Utilisateurs">S'inscrire</a>
+                    <a class="dropdown-item" asp-action="SeDeconnecter" asp-controller="Utilisateurs">Se déconnecter</a>    
+                </div>
+            </div>
+        </nav>
+        
+            <div class="darkblue-background" style="height:100%">
+                @RenderBody()
+            </div>
+
+
+
+
+
+
+
+
+    <footer class=" custumfooter">
+        <div class="footerdiv">
+            <div class="firstlogo">
+                <img src="~/logos/CAN25_LogoHabib.png">
+            </div>
+            <div class="aboutus">
+                <h2>About us</h2>
+                <p>Notre site est dédié a la CAN 2025 au Maroc </p>
+            </div>
+            <div class="contactus">
+                <h2>Contact-Info</h2>
+                <p><i class="fas fa-phone"></i> 0651452145</p>
+                <p><i class="fas fa-envelope"></i> can-info@gmail.com</p>
+            </div>
+            <div class="loca">
+                <h2>Localisation</h2>
+                <p><i class="fas fa-map-marker-alt"></i> Adresse : 123 Rue Nakhil, Oujda, Maroc</p>
+                <div class="map">
+                </div>
+            </div>
+        </div>
+        <div class="rights">
+            <p>CAN2025 © All rights reserved</p>
+        </div>
+    </footer>
+
+
+
+
+
+
+    @* <footer class="border-top footer text-muted">
+       
+    </footer> *@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="~/js/jsacceuil.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("scripts",required:false)
+     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script> 
+    
+</body>
+</html>

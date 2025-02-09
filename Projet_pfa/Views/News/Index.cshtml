@@ -1,0 +1,27 @@
+﻿<div class="d-flex  justify-content-center darkblue-background container-fluid " style="max-width:70%;flex-direction:column">
+
+
+@foreach(News news in ViewBag.NewsList)
+{
+  
+    <div class="margin-sides padding blue-background coins-arrondis margin-bottom" >
+        <div class="row">
+            <div class="col-md-5">
+                <div class="img-container">
+                    @* <img src="~/images/UploadedImages/@news.Photo" class="d-block w-100 coins-arrondis" alt="Pas d'image"> *@
+                        @* <img src="~/images/UploadedImages/@news.Photo" class="d-block w-100 coins-arrondis" alt="Pas d'image" > *@
+                        <img src="~/images/@news.Photo" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex align-items-center h-100">
+                    <div>
+                        <h3 style="color:yellow">@news.Titre</h3>
+                        <p class="text-white">@news.Texte</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+}
+</div>

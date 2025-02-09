@@ -1,0 +1,115 @@
+﻿@model Projet_pfa.ViewModel.MatchViewModel
+
+<form asp-action="Modifier" asp-controller="Match" asp-route-id=@Model.match.Id method="post" class="text-light">
+    <div>
+        <label>Date : </label>
+        <input type="date" asp-for="Date" value=@Model.match.Date.ToString("yyyy-MM-dd") />
+    </div>
+    <div>
+        <label>Equipe 1 : </label>
+        <select asp-for="IdEquipe1" id="Equipe1">
+            <option value="" selected="selected">-- Sélectionnez une équipe --</option>
+            @foreach (Equipe equipe in Model.equipes1)
+            {
+                <option value=@equipe.Id>@equipe.Nom</option>
+                
+            }
+        </select>
+    </div>
+    <div>
+        <label>Equipe 2 : </label>
+        <select asp-for="IdEquipe2" id="Equipe2">
+            <option value="" selected="selected">-- Sélectionnez une équipe --</option>
+            @foreach (Equipe equipe in Model.equipes2)
+            {
+                <option value=@equipe.Id>@equipe.Nom</option>
+                
+            }
+        </select>
+        @if (TempData["SameEquipe"] != null)
+        {
+            <div style="color:red;">
+                Vous ne pouvez pas Choisir la même equipe dans un seul match
+            </div>
+        }
+    </div>
+
+    <div>
+        <label>Stade : </label>
+        <select asp-for="IdStade">
+            <option value=@Model.match.Stade.Id selected>@Model.match.Stade.Nom, @Model.match.Stade.Ville.Nom</option>
+            @foreach (var stade in Model.stades)
+            {
+                @if (@stade.Id != Model.match.Stade.Id)
+                {
+                    <option value=@stade.Id>@stade.Nom, @stade.Ville.Nom</option>
+                }
+
+            }
+        </select>
+    </div>
+    <div>
+        <label>Prix C1 : </label>
+        <input type="number" min="0" step="10" placeholder="0" asp-for="PrixSiegeCat1" value=@Model.match.PrixSiegeCat1>
+    </div>
+    <div>
+        <label>Prix C2 : </label>
+        <input type="number" min="0" step="10" placeholder="0" asp-for="PrixSiegeCat2" value=@Model.match.PrixSiegeCat2>
+    </div>
+    <div>
+        <label>Prix C3 : </label>
+        <input type="number" min="0" step="10" placeholder="0" asp-for="PrixSiegeCat3" value=@Model.match.PrixSiegeCat3>
+    </div>
+    <div>
+        <label>Résultat : </label>
+        <input type="text" asp-for="Resultat" value=@Model.match.Resultat>
+    </div>
+
+    <button type="submit">Modifier</button>
+</form>
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("#Equipe1 option[selected], #Equipe2 option[selected]").removeAttr('selected');
+            // Get both select elements
+            const equipe1Select = $("#Equipe1");
+            const equipe2Select = $("#Equipe2");
+            function deleteDuplicated() {
+                equipe2Select.find('option').each(function () {
+                    const optionValue = $(this).val();
+                    if (optionValue === selectedEquipe1Id) {
+                        $(this).remove(); // Disable duplicate option in Equipe2
+                    }
+                });
+            }
+
+            // Populate the second select initially (optional, adjust as needed)
+            equipe2Select.append($("#Equipe1 option").clone());
+
+            // ----------------------------------
+            equipe1Select.on("change", function () {
+                const selectedValue = $(this).val();
+                
+                // Show all options in equipe2
+                equipe2Select.find('option').attr('hidden', false);
+
+                // Hide the newly selected option (if any)
+                // equipe2Select.find(`option[value="${selectedValue}"]`).attr('hidden', true);
+                equipe2Select.find(`option[value="${selectedValue}"]`).prop('disabled', true);
+            });
+
+            //-----------------------------------------
+            equipe2Select.on("change", function () {
+                const selectedValue = $(this).val();
+
+                // Show all options in equipe2
+                equipe2Select.find('option').attr('hidden', false);
+
+                // Hide the newly selected option (if any)
+                // equipe1Select.find(`option[value="${selectedValue}"]`).attr('hidden', true);
+                equipe1Select.find(`option[value="${selectedValue}"]`).prop('disabled', true);
+            });
+        });
+    </script>
+}

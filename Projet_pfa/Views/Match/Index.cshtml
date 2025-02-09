@@ -1,0 +1,85 @@
+﻿    @model Projet_pfa.ViewModel.DateDebutDateFin
+
+<div class="container-fluid   darkblue-background" style="max-width: 70%;">
+    @if (ViewBag.IsAdmin == true)
+    {
+        <a asp-action="GererMatchs" class="btn btn-danger d-flex justify-content-center align-items-center w-25" style="margin-block:15px;" asp-controller="Match">Gérer les matchs</a>
+    }
+    
+    <form action="/Match/FiltrerMatchs"  method="post">
+    <div style="display: flex; justify-content:space-around; color:white">
+            <div>
+                <label>Afficher les matchs de : </label>
+                <input type="date" asp-for="DateDebut" />
+            </div>
+            <div>
+                <label>à : </label>
+                <input type="date" asp-for="DateFin" />
+            </div>
+            <div>
+                <label>Stade : </label>
+                <select asp-for="IdStade">
+                    <option value="">-- Tous les stades --</option>
+                    @foreach (var stade in @ViewBag.Stades)
+                    {
+                        <option value=@stade.Id>@stade.Nom, @stade.Ville.Nom</option>
+                    }
+                </select>
+            </div>
+        <button type="submit">Filtrer</button>
+        </div>
+        
+        
+    </form>
+    <div class="container mt-4  ">
+        <table class="table table-hover text-center">
+            <tbody>
+                @foreach (var match in @ViewBag.Matches)
+                {
+                <tr class="align-middle">
+                        <td class="left-rounded">
+                            <a href="@Url.Action("Details", "Equipe", new { id = @match.Equipe1.Id })" class="text-decoration-none vertical-center">
+                                <img src="~/@match.Equipe1.Drapeau" width="50px" height="50px" class="cercle border border-1 border-success" />
+                                <span class="btn font1 text-light" style="font-size: 20px">@match.Equipe1.Nom</span>
+                            </a>
+                        </td>
+                        <td>
+                            @if (match.Date < DateTime.Now)
+                            {
+                                <span class="font1" style="font-size: 30px; color:yellow">@match.Resultat</span>
+                                <br />
+                                <span class="font1 text-light" style="font-size: 15px">Joué le @match.Date.ToString("dd/MM/yyyy HH:mm")</span>
+                                <br />
+                                <span class="font1 text-light" style="font-size: 15px">à @match.Stade.Nom, @match.Stade.Ville.Nom</span>
+                            }
+                            else
+                            {
+                                <span class="font1 text-light" style="font-size: 20px">Prévu le @match.Date.ToString("dd/MM/yyyy HH:mm")</span>
+                                <br />
+                                <span class="font1 text-light" style="font-size: 20px">à @match.Stade.Nom, @match.Stade.Ville.Nom</span>
+                                <br />
+                                <a href=@match.Stade.Localisation class="text-decoration-none">
+                                <img src="~/images/localisation.png" width="25" > <span class=" font1" style="color:lightskyblue">Voir localisation</span>
+                                </a>
+                            }
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Details", "Equipe", new { id = @match.Equipe2.Id })" class="text-decoration-none vertical-center">
+                                <img src="~/@match.Equipe2.Drapeau" class="cercle border border-1 border-success" />
+                                <span class="btn font1 text-light" style="font-size: 20px">@match.Equipe2.Nom</span>
+                            </a>
+                        </td>
+                        <td class="right-rounded">
+                            @if (match.Date > DateTime.Now)
+                            {
+                                <a class="btn " style="background-color:yellow" href="@Url.Action("MatchInfo", "Ticket", new { id = @match.Id })">
+                                <img src="~/images/achats.png" width="40" class="text-light"> <span class="font1" style="color:red">Réserver vos tickets</span>
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
